@@ -9,11 +9,13 @@
                 <h4 class="use-case-title">Pre-population with a Date Object</h4>
                 <p>Your solution should allow the ng-model value to be pre-set using a date object.</p>
                 <label>Sample Usage:</label>
-                <div class="use-case-1" ui-ace="{ mode : 'html', useWrapMode : true,  theme:'chrome', onLoad: demoCtrl.aceLoaded, showGutter: false }" ng-model="demoCtrl.useCase1">
-
+                <div class="use-case-1" ui-ace="{ mode : 'html', useWrapMode : true,  theme:'chrome',
+                 onLoad: demoCtrl.aceLoaded, showGutter: false }" ng-model="demoCtrl.useCase1">
                 </div>
             <td>
-            <td><div fh-date-input ng-model="demoCtrl.prepopulatedFromDateObject"></div></td>
+            <td>
+                <div fh-date-input ng-model="demoCtrl.prepopulatedFromDateObject"></div>
+            </td>
         </tr>
         <tr>
             <td width="50%">
@@ -70,7 +72,7 @@
                 <p>If fh-required=true, the ng-model should be invalid, and the model should have the error 'required'. You may want to modify the same code in the right of this column to have an ng-form and ng-messages to show errors on the field.</p>
                 <label>Sample Usage:</label>
                 <div class="use-case-6" ui-ace="{ mode : 'html', useWrapMode : true,  theme:'chrome', onLoad: demoCtrl.aceLoaded, showGutter: false }" ng-model="demoCtrl.useCase6">
-
+               
                 </div>
             <td>
             <td><div fh-date-input fh-required="true"></div></td>
@@ -85,7 +87,7 @@
 
                 </div>
             </td>
-            <td><div fh-date-input fh-precision="month"></div></td>
+            <td><div fh-date-input fh-precision="'month'"></div></td>
         </tr>
         <tr>
             <td>
@@ -97,7 +99,7 @@
 
                 </div>
             </td>
-            <td><div fh-date-input fh-precision="year"></div></td>
+            <td><div fh-date-input fh-precision="'year'"></div></td>
         </tr>
     </table>
     </div>

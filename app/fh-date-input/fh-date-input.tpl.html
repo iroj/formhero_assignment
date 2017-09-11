@@ -1,0 +1,58 @@
+<md-toolbar  layout="row">
+    <md-button ng-if='!(datePrecision==="year")' ng-click="changeView('month')">{{monthList[selectedDate.month] || 'Month'}}</md-button>
+    <md-button ng-if='!datePrecision' ng-click="changeView('day')">{{selectedDate.day || 'Day'}}</md-button>
+    <md-button ng-click="changeView('year')">{{selectedDate.year || 'Year'}}</md-button>
+</md-toolbar>
+
+<md-card ng-if='view==="month"'>
+    <md-card-header layout='row' layout-align='center center'>
+        <h4 flex='80'>Month</h4>
+        <md-button  class="md-icon-button" ng-click="changeView()"> <i class="material-icons">close</i></md-button>
+    </md-card-header>
+    <md-card-content>
+        <md-grid-list md-cols="6" md-row-height="4:3">
+            <md-grid-tile md-colspan="2" ng-repeat='month in select.months()'>
+                <md-button ng-click='setMonth($index)' ng-disabled="selectedDate.year==maxDate.year && $index-1>=maxDate.month ||
+                        selectedDate.year==minDate.year && $index+1<=minDate.month">{{month}}</md-button>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-card-content>
+</md-card>
+<md-card ng-if='view==="day"'>
+    <md-card-header layout='row' layout-align='center center'>
+        <md-button class="md-icon-button" ng-click="changeView('month')"> <i class="material-icons">chevron_left</i></md-button>
+        <h4 flex='60'>{{monthList[selectedDate.month]}}</h4>
+        <md-button  class="md-icon-button" ng-click='changeView()'> <i class="material-icons">close</i></md-button>
+    </md-card-header>
+    <md-card-content>
+        <md-grid-list md-cols="7" md-row-height="4:3">
+            <md-grid-tile md-colspan="1" ng-repeat='day in select.days()'>
+                <md-button class="md-icon-button" ng-click='setDay(day)' ng-disabled="selectedDate.year==maxDate.year && selectedDate.month==maxDate.month  && $index>=maxDate.day ||
+                selectedDate.year==minDate.year && selectedDate.month==minDate.month  && $index<=minDate.day">
+
+                    {{day}}</md-button>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-card-content>
+</md-card>
+
+<md-card ng-if='view==="year"'>
+    <md-card-header layout='row' layout-align='center center' ng-show='!datePrecision'>
+        <md-button  class="md-icon-button" ng-click="changeView('day')"> <i class="material-icons">chevron_left</i></md-button>
+        <h4 flex='60'>{{monthList[selectedDate.month]}} {{selectedDate.day}}</h4>
+        <md-button  class="md-icon-button" ng-click="changeView()"><i class="material-icons">close</i></md-button>
+    </md-card-header>
+    <md-card-content ng-init='getYearList(selectedDate.year)'>
+        <md-grid-list md-cols="6" md-row-height="4:3">
+            <md-grid-list-header layout='row' layout-align='center center'>
+                <md-button class="md-icon-button" ng-disabled="yearsList[0]<minDate.year" ng-click="getYearList(yearsList[0]-10)"> <i flex='5' class="material-icons">chevron_left</i></md-button>
+                <h5 flex='90' style='text-align:center'>{{yearsList[0]}}s</h5>
+                <md-button class="md-icon-button" ng-disabled="yearsList[9]>maxDate.year" ng-click="getYearList(yearsList[0]+10)">
+                    <i flex='5' class="material-icons">chevron_right</i></md-button>
+            </md-grid-list-header>
+            <md-grid-tile md-colspan="2" ng-repeat='year in yearsList'>
+                <md-button ng-click='setYear(year)' ng-disabled="year>maxDate.year || year<minDate.year">{{year}}</md-button>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-card-content>
+</md-card>
